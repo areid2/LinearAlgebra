@@ -1,12 +1,12 @@
 clear; close; clc;
 
 %preprocessing
-dd = importdata('yale32.mat');
+load 'yale32.mat';
 
 % there are 15 people with 11 faces. columns correspond to people, stacks
 % are expressions
-df = dd.fea;
-dg = dd.gnd;
+df = fea;
+dg = gnd;
 a = zeros(1024,11,15);
 for i=1:15
     for j=1:11
