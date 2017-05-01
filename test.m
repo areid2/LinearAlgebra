@@ -1,7 +1,7 @@
 clear; close; clc;
 
 %preprocessing
-load 'yale32.mat';
+load('yale32.mat');
 
 % there are 15 people with 11 faces. columns correspond to people, stacks
 % are expressions
@@ -23,6 +23,9 @@ for e = 1:11
     t = permute(c(:,e,:),[1,3,2]);
     ae = (t'*t)\t'*z;
     for p=1:15
-        norm((ae-h(p,:)),2)
+        n=norm((ae-h(p,:)'),2);
+        norm_list=[norm_list n];
     end
 end
+norm_min=min(norm_list);
+find(norm_list==norm_min)
