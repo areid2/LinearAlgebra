@@ -23,9 +23,11 @@ for e = 1:11
     t = permute(c(:,e,:),[1,3,2]);
     ae = (t'*t)\t'*z;
     for p=1:15
-        n=norm((ae-h(p,:)'),2);
-        norm_list=[norm_list n];
+        n = norm((ae-h(p,:)'),2);
+        if n < 0.001
+            disp(n)
+            disp(e)
+            disp(p)
+        end
     end
 end
-norm_min=min(norm_list);
-find(norm_list==norm_min)
