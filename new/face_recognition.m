@@ -21,6 +21,7 @@ z=tfea(r,:)';
 [s,f,g,h]=thinHOSVD(a);
 c = tmul(tmul(s,f,1),g,2);
 rsoln=-1;
+rexp=-1;
 m=Inf;
 for ie=1:e
     t=permute(c(:,ie,:),[1,3,2]);
@@ -29,11 +30,14 @@ for ie=1:e
         if norm((ae-h(ip,:)'),2)<m
             m=norm((ae-h(ip,:)'),2);
             rsoln=ip;
+            rexp=ie;
         end
     end
 end
 
 %answer
 disp(tgnd(r)==rsoln);
-%face64(z);
-%face64(a(:,1,rsoln));
+figure
+face64(z);
+figure
+face64(a(:,rexp,rsoln));
