@@ -37,7 +37,9 @@ end
 
 %answer
 disp(tgnd(r)==rsoln);
-figure
-face64(z);
-figure
-face64(a(:,rexp,rsoln));
+subplot(1,2,1), face64(z)
+title('Randomly Picked Face')
+pbaspect([1 1 1])
+subplot(1,2,2), face64(a(:,rexp,rsoln))
+title('Facial Recognition Software Returned Face')
+pbaspect([1 1 1])
