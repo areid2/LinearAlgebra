@@ -4,7 +4,7 @@ i’m just trying it out too
 hello
 whats up peter
 hi abbie
-thanks for spelling my name right
+thanks for spelling my name right.
 
 Peter, 
 I was running the recognition code in the new folder repeatedly, just to see what would happen. Most of the time, it’s spot on and gets the right guy. Not every time though. Sometimes it’s prints the wrong person. We’ll talk more later. Just wanted to let you know. 
