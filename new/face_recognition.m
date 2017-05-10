@@ -1,7 +1,7 @@
 clear; close; clc;
 
 %load variables from ryale_gen
-res = 32;
+res = 64;
 load(['ryale', int2str(res), '.mat']);
 
 %random number for test picture

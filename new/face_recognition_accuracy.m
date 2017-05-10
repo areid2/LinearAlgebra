@@ -1,7 +1,8 @@
 clear; close; clc;
 
 %load variables from ryale_gen
-load('ryale64.mat');
+res = 32;
+load(['ryale', int2str(res), '.mat']);
 tic;
 
 for p=1:50
@@ -9,7 +10,7 @@ for p=1:50
     r=randi(size(tgnd,1));
 
     %image vector length, pictures per person, number of people
-    a=zeros(4096,e,15);
+    a=zeros(res^2,e,15);
     for i=1:15
         for j=1:e
             a(:,j,i)=rfea((i-1)*e+j,:);
