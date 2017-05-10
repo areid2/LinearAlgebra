@@ -1,13 +1,14 @@
 clear; close; clc;
 
 %load variables from ryale_gen
-load('ryale64.mat');
+res = 32;
+load(['ryale', int2str(res), '.mat']);
 
 %random number for test picture
 r=randi(size(tgnd,1));
 
 %image vector length, pictures per person, number of people
-a=zeros(4096,e,15);
+a=zeros(res^2,e,15);
 for i=1:15
     for j=1:e
         a(:,j,i)=rfea((i-1)*e+j,:);
@@ -37,9 +38,9 @@ end
 
 %answer
 disp(tgnd(r)==rsoln);
-subplot(1,2,1), face64(z)
+subplot(1,2,1), see(z, res)
 title('Randomly Picked Face')
 pbaspect([1 1 1])
-subplot(1,2,2), face64(a(:,rexp,rsoln))
+subplot(1,2,2), see(a(:,rexp,rsoln), res)
 title('Facial Recognition Software Returned Face')
 pbaspect([1 1 1])

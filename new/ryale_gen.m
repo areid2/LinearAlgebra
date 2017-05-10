@@ -1,15 +1,18 @@
 clear; close; clc;
 
+%resolution
+res=32;
+
 %load yale face database
-load('yale64.mat');
+load(['yale', int2str(res), '.mat']);
 
 %expressions to reduce to
 e=10;
 
 %reduced vars, test vars
-rfea=zeros(e*15, 4096);
+rfea=zeros(e*15, res^2);
 rgnd=zeros(e*15, 1);
-tfea=zeros((11-e)*15, 4096);
+tfea=zeros((11-e)*15, res^2);
 tgnd=zeros((11-e)*15, 1);
 
 %reduced generation
@@ -33,4 +36,4 @@ for i=1:15
 end
 
 %save variables to ryale32.mat
-save('ryale64.mat', 'e', 'fea', 'gnd', 'rfea', 'rgnd', 'tfea', 'tgnd');
+save(['ryale', int2str(res), '.mat'], 'e', 'fea', 'gnd', 'rfea', 'rgnd', 'tfea', 'tgnd');
