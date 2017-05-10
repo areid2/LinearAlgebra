@@ -1,11 +1,11 @@
 clear; close; clc;
 
 %load variables from ryale_gen
-res = 64;
+res = 32;
 load(['ryale', int2str(res), '.mat']);
 
 %random number for test picture
-r=randi(size(tgnd,1));
+rnum=randi(size(tgnd,1));
 
 %image vector length, pictures per person, number of people
 a=zeros(res^2,e,15);
@@ -16,20 +16,29 @@ for i=1:15
 end
 
 %set test picture
-z=tfea(r,:)'; 
+z=tfea(rnum,:)'; 
 
 %face recognition algorithm
+
+%preprocessing
 [s,f,g,h]=thinHOSVD(a);
-c = tmul(tmul(s,f,1),g,2);
+c = tmul(s,g,2);
 rsoln=-1;
 rexp=-1;
 m=Inf;
+q=zeros(150,15,e);
+r=zeros(15,15,e);
 for ie=1:e
-    t=permute(c(:,ie,:),[1,3,2]);
-    ae=(t'*t)\t'*z;
+    b=permute(c(:,ie,:),[1,3,2]);
+    [q(:,:,ie),r(:,:,ie)]=qr(b,0);
+end
+
+for ie=1:e
+    ae=r(:,:,ie)\(q(:,:,ie)'*f'*z);
     for ip=1:15
-        if norm((ae-h(ip,:)'),2)<m
-            m=norm((ae-h(ip,:)'),2);
+        tnorm = norm((ae-h(ip,:)'),2);
+        if tnorm<m
+            m=tnorm;
             rsoln=ip;
             rexp=ie;
         end
@@ -37,7 +46,7 @@ for ie=1:e
 end
 
 %answer
-disp(tgnd(r)==rsoln);
+disp(tgnd(rnum)==rsoln);
 subplot(1,2,1), see(z, res)
 title('Randomly Picked Face')
 pbaspect([1 1 1])
